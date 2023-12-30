@@ -1,3 +1,6 @@
 # Ignore all unnecessary files
-node_modules/*
+url_shortner_be/node_modules/*
+url_shortner_mobile/.dart_tool/*
+url_shortner_mobile/.idea/*
+url_shortner_mobile/pubspec.lock
 package-lock.json
