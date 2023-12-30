@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const shortid = require("shortid");
 const URL = require("../models/url_model");
+const {BASE_URL} = require("../constants/global_const")
 
 async function handleAndCreateShortURL(req, res) {
   if (!req.body || !req.body.long_url)
@@ -15,7 +16,7 @@ async function handleAndCreateShortURL(req, res) {
   });
   try {
     await url.save();
-    return res.status(201).json(url);
+    return res.status(201).json({short_url:`${BASE_URL}${short_url}`});
   } catch (err) {
     return res.status(500).json({ error: err });
   }
