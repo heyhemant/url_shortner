@@ -21,11 +21,11 @@ class HomePageController extends GetxController {
       try {
         Response response = await ApiServices().getShortUrl(urlController.text);
         if (response.statusCode == 201) {
-          alertItemModel.message = 'Shortened URL: ${jsonDecode(response.body)['short_url'] }'  ;
+          alertItemModel.message = 'Shortened URL: ${jsonDecode(response.body)['short_url']}'  ;
           alertItemModel.type = CoolAlertType.success;
           alertItemModel.title = 'Success';
         } else {
-          alertItemModel.message = response.body;
+          alertItemModel.message = jsonDecode(response.body)['error'].toString();
           alertItemModel.type = CoolAlertType.error;
           alertItemModel.title = 'Error';
         }

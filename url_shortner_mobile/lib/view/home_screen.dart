@@ -54,15 +54,19 @@ class _HomePageState extends State<HomePage> {
                       type: response.type,
                       text: response.message,
                       title: response.title,
-                      confirmBtnText: 'Copy URL',
+                      confirmBtnText: response.type == CoolAlertType.success
+                          ? 'Copy URL'
+                          : 'Close',
                       onConfirmBtnTap: () async {
-                        await Clipboard.setData(ClipboardData(
-                            text: response.message
-                                .replaceAll('Shortened URL: ', '')));
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text('Link copied to clipboard!')),
-                        );
+                        if (response.type == CoolAlertType.success) {
+                          await Clipboard.setData(ClipboardData(
+                              text: response.message
+                                  .replaceAll('Shortened URL: ', '')));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Link copied to clipboard!')),
+                          );
+                        }
                       });
                 },
                 child: const Text('Shorten URL'),

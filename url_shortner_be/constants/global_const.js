@@ -1,3 +1,5 @@
-const PORT = 8001;
-const DB_URL = 'mongodb+srv://heyhemant:NFvjUc6sDDGYFODl@urlshortner.sgk1uqa.mongodb.net/?retryWrites=true&w=majority'; //Add your mongodb url
-module.exports = { PORT, DB_URL };
+const PORT = 8001; //Add your port
+const DB_URL = '' //Add your DB URL
+const BASE_URL = '' //Add your base URL
+
+module.exports = { PORT, DB_URL, BASE_URL };

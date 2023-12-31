@@ -1,12 +1,21 @@
 const mongoose = require("mongoose");
 const shortid = require("shortid");
 const URL = require("../models/url_model");
-const {BASE_URL} = require("../constants/global_const")
+const { BASE_URL } = require("../constants/global_const")
+
+const urlRegex = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+
+function isValidUrl(url) {
+  return urlRegex.test(url);
+}
 
 async function handleAndCreateShortURL(req, res) {
   if (!req.body || !req.body.long_url)
     return res.status(400).json({ error: "Please provide a long_url" });
   const long_url = req.body.long_url;
+  if(!(isValidUrl(long_url))){
+    return res.status(400).json({ error: "Please Enter a Valid URL" });
+  }
   const short_url = shortid.generate();
   const url = new URL({
     _id: new mongoose.Types.ObjectId(),
@@ -16,7 +25,7 @@ async function handleAndCreateShortURL(req, res) {
   });
   try {
     await url.save();
-    return res.status(201).json({short_url:`${BASE_URL}${short_url}`});
+    return res.status(201).json({ short_url: `${BASE_URL}${short_url}` });
   } catch (err) {
     return res.status(500).json({ error: err });
   }

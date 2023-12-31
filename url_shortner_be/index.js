@@ -1,7 +1,7 @@
 const express = require('express');
 const {PORT} = require('./constants/global_const');
 const { connectToMongoDB } = require('./connect');
-const urlRoute = require('./routes/url_routes');
+const urlRoute = require('./routes/root_routes');
 
 const app = express();
 
@@ -14,4 +14,4 @@ app.listen(PORT, () => {
 
 app.use(express.json());
 app.use(express.urlencoded());
-app.use('/url', urlRoute);
+app.use('/', urlRoute);

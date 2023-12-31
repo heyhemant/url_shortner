@@ -5,7 +5,7 @@ const URL = require('../models/url_model');
 const router = express.Router();
 
 router.get('/:short_id', handleAndRedirect);
-router.post('/',handleAndCreateShortURL);
-router.get('/analytics/:short_id', handleUrlAnalytics);
+router.post('/url',handleAndCreateShortURL);
+router.get('/url/analytics/:short_id', handleUrlAnalytics);
 
 module.exports = router;
